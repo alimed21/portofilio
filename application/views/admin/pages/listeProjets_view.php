@@ -35,6 +35,11 @@
                                 <?php echo $this->session->flashdata('success'); ?>
                             </div>
                         <?php endif;?>
+						<?php if (isset($error_message)) { ?>
+							<div class="alert alert-danger" role="alert">
+								<?php echo $error_message; ?>
+							</div>
+						<?php } ?>
                         <thead>
                             <tr>
                                 <th>Titre</th>
@@ -55,7 +60,7 @@
                                         <td>
                                         <a href="<?php echo base_url();?>uploads/projets/<?php echo $pro->image_pro;?>" rel="lightbox"><i class="fa fa-eye" style="color:green"></i></a>
                                            |
-                                           <a href="#">
+                                           <a href="<?php echo base_url();?>Admin/Projets/ModifierImage/<?php echo $pro->token;?>">
                                                <i class="fa fa-edit"></i>
                                            </a>
                                         </td>
@@ -63,7 +68,7 @@
                                             <?php echo $pro->type;?>
                                         </td>
                                         <td>
-                                            <a href="#" target="_blank">
+                                            <a href="<?php echo base_url();?>Admin/Projets/modifierProjet/<?php echo $pro->token;?>">
                                                 <i class="fa fa-edit">
                                                 </i>
                                             </a>

@@ -61,8 +61,8 @@
                                                 </i>
                                             </a>
                                            |
-                                           <a href="#">
-                                               <i class="fa fa-trash"></i>
+                                           <a href="<?php echo base_url();?>Admin/Services/supprimerService/<?php echo $ser->token_ser;?>">
+                                               <i class="fa fa-trash" style="color: red"></i>
                                            </a>
                                         </td>
                                     </tr>

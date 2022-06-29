@@ -10,7 +10,7 @@ class Services_model extends CI_Model
     }
 
     public function getAllServices(){
-        $this->db->select("id_ser, titre_ser, substr(intro_ser, 1, 150) as slide_descrip, image_ser, date_add");
+        $this->db->select("id_ser, titre_ser, substr(intro_ser, 1, 150) as slide_descrip, image_ser, date_add, token_ser");
         $this->db->from("services as s");
         $this->db->join("administrateur as ad", "ad.id_admin  = s.user_add");
         $this->db->where("s.user_delete  is null");
@@ -27,11 +27,12 @@ class Services_model extends CI_Model
         }
     }
 
-    public function getDetailArticle($id){
-        $this->db->select("idarticle, article_title, article_content, article_date");
-        $this->db->from("articles as a");
-        $this->db->where("idarticle", $id);
-        $this->db->where("a.date_delete is null");
+    public function getDetailService($token){
+        $this->db->select("titre_ser, intro_ser, token_ser");
+        $this->db->from("services");
+        $this->db->where("token_ser", $token);
+		$this->db->where("user_delete  is null");
+		$this->db->where("date_delete is null");
         $query = $this->db->get();
         if($query->num_rows() > 0)
         {
@@ -73,10 +74,10 @@ class Services_model extends CI_Model
     }
 
 
-    public function suppremierArticle($data, $id_article)
+    public function suppremierService($data, $token)
     {
-        $this->db->where('idarticle', $id_article );
-        $this->db->update('articles', $data);
+        $this->db->where('token_ser', $token);
+        $this->db->update('services', $data);
         return true;
     }
 

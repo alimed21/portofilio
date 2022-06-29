@@ -25,10 +25,10 @@ class Projets_model extends CI_Model
         }
     }
 
-    public function getDetailProjet($id){
-        $this->db->select("id_pro, titre_pro, type, lien, contenu_pro");
+    public function getDetailProjet($token){
+        $this->db->select("token, titre_pro, type, lien, contenu_pro, date_pro");
         $this->db->from("projet");
-        $this->db->where("id_pro", $id);
+        $this->db->where("token", $token);
         $this->db->where("date_delete is null");
         $this->db->limit(1);
         $query = $this->db->get();
@@ -42,8 +42,8 @@ class Projets_model extends CI_Model
         }
     }
 
-    public function updateProjet($data, $id){
-        $this->db->where('id_pro', $id );
+    public function updateProjet($data, $token){
+        $this->db->where('token', $token);
         $this->db->update('projet', $data);
         return true;
     }

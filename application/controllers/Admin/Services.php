@@ -103,6 +103,31 @@ class Services extends CI_Controller
         }
     }
 
+	/** Supprimer un service*/
+	public function supprimerService($token){
+
+		$id_user = $this->session->userdata('id_admin');
+		$date_add = $this->getDatetimeNow();
+
+		$data = array(
+			'user_delete' => $id_user,
+			'date_delete' => $date_add
+		);
+
+		$supprimerServices= $this->Services_model->suppremierService($data, $token);
+
+		if ($supprimerServices = true)
+		{
+			$this->session->set_flashdata('success', "Suppression d'un service réussi");
+			redirect('Admin/Services');
+		}
+		else{
+			$this->session->set_flashdata('error', 'Veuillez réessayer.');
+			redirect('Admin/Services');
+		}
+	}
+
+
 }
 
 

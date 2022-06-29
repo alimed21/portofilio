@@ -46,7 +46,7 @@ class Projets extends CI_Controller
         $this->form_validation->set_rules('titre', "titre", 'trim|required');
         $this->form_validation->set_rules('date_art', 'date', 'trim|required');
         $this->form_validation->set_rules('lien', 'lien', 'trim|required');
-        $this->form_validation->set_rules('etat', 'etat', 'trim|required');
+        $this->form_validation->set_rules('etat', 'etat', 'trim|require  bdhed');
         $this->form_validation->set_rules('description', 'contenu', 'trim|required');
 
         if ($this->form_validation->run() == true) {
@@ -65,34 +65,38 @@ class Projets extends CI_Controller
             if (!$this->upload->do_upload('userfile')) {
                 
                 $data['error_message'] = $this->upload->display_errors();
-                $data['title'] = 'Ajoute d\'un projet';
+				$data['title'] = 'Liste des projets';
 
-                $this->load->view('admin/templates/header_view', $data);
-                $this->load->view('admin/pages/ajoutProjet_view', $data);
-                $this->load->view('admin/templates/footer_view');
+				/** Liste des projets */
+				$projets = $this->Projets_model->getAllProjet();
+				$data['projets'] = $projets;
+
+				$this->load->view('admin/templates/header_view', $data);
+				$this->load->view('admin/pages/listeProjets_view', $data);
+				$this->load->view('admin/templates/footer_view');
             }
             else{
                 //True
-                $titre = $this->input->post('titre');
-                $lien = $this->input->post('lien');
-                $date_art = $this->input->post('date_art');
-                $description = $this->input->post('description');
-                $etat = $this->input->post('etat');
+				$titre = $this->input->post('titre');
+				$lien = $this->input->post('lien');
+				$date_art = $this->input->post('date_art');
+				$description = $this->input->post('description');
+				$etat = $this->input->post('etat');
                 $full_path = strtolower($this->upload->data('file_name'));
-                $token =  random_string('alnum', 7);
-                $id_admin = $this->session->userdata('id_admin');
-                $date_add = $this->getDatetimeNow();
+				$token =  random_string('alnum', 7);
+				$id_admin = $this->session->userdata('id_admin');
+				$date_add = $this->getDatetimeNow();
                 
                 $data = array(
-                    'titre_pro' => $titre,
+                	'titre_pro' => $titre,
                     'contenu_pro' => $description,
                     'date_pro' => $date_art,
-                    'lien ' => $lien,
-                    'image_pro ' => $full_path,
-                    'type ' => $etat,
-                    'token' => $token,
-                    'user_add ' => $id_admin,
-                    'date_add ' => $date_add
+                    'lien' => $lien,
+                    'image_pro' => strtolower($full_path),
+					'type' => $etat,
+					'token' => $token,
+					'user_add' => $id_admin,
+					'date_add' => $date_add
                 );
 
                 $ajoutProjet = $this->Projets_model->addProjet($data);
@@ -136,6 +140,115 @@ class Projets extends CI_Controller
 		}
 	}
 
+	/** Modification d'un projet*/
+	public function modifierProjet($token){
+		$data['title'] = 'Modification d\'un projet';
+		/**  Récupération des projet */
+		$detailProjets = $this->Projets_model->getDetailProjet($token);
+		$data['detailProjets'] = $detailProjets;
+
+		$this->load->view('admin/templates/header_view', $data);
+		$this->load->view('admin/pages/modifierProjet_view', $data);
+		$this->load->view('admin/templates/footer_view');
+	}
+
+	public function modificationProjet(){
+		$this->form_validation->set_rules('titre', "titre", 'trim|required');
+		$this->form_validation->set_rules('date_art', 'date', 'trim|required');
+		$this->form_validation->set_rules('lien', 'lien', 'trim|required');
+		$this->form_validation->set_rules('etat', 'etat', 'trim|required');
+		$this->form_validation->set_rules('description', 'contenu', 'trim|required');
+
+		$token = $this->input->post('token');
+
+		if ($this->form_validation->run() == true) {
+
+			$titre = $this->input->post('titre');
+			$lien = $this->input->post('lien');
+			$date_art = $this->input->post('date_art');
+			$description = $this->input->post('description');
+			$etat = $this->input->post('etat');
+
+			$data = array(
+				'titre_pro' => $titre,
+				'contenu_pro' => $description,
+				'date_pro' => $date_art,
+				'lien ' => $lien,
+				'type ' => $etat
+			);
+
+
+			$updateProjet = $this->Projets_model->updateProjet($data, $token);
+			if ($updateProjet = true) {
+				$this->session->set_flashdata('sucess', 'Modification du projet réussi');
+				redirect('Admin/Projets');
+			} else {
+				$this->session->set_flashdata('error', 'Veuillez réessayer.');
+				redirect('Admin/Projets/modifierProjet' . $token);
+			}
+		}
+		else{
+			$this->modifierProjet($token);
+		}
+	}
+
+	/** Modification image projet*/
+	public function ModifierImage($token){
+		/**  Récupération des projet */
+		$detailProjets = $this->Projets_model->getDetailProjet($token);
+		$data['detailProjets'] = $detailProjets;
+
+		$data['title'] = 'Modification de l\'image d\'un projet';
+
+		$this->load->view('admin/templates/header_view', $data);
+		$this->load->view('admin/pages/modifierImageProjet_view', $data);
+		$this->load->view('admin/templates/footer_view');
+	}
+
+
+	public function modificationImage(){
+		//token
+		$token = $this->input->post('token');
+		//Config image
+		$config['upload_path'] = './uploads/projets';
+		$config['allowed_types'] = 'jpg|png|jpeg|JPG|PNG|JPEG';
+		$config['max_size'] = 10000;
+		$config['max_width'] = 2000;
+		$config['max_height'] = 1990;
+		$config['encrypt_name'] = TRUE;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+
+		if (!$this->upload->do_upload('userfile')) {
+
+			$data['error_message'] = $this->upload->display_errors();
+			$data['title'] = 'Liste des projets';
+
+			/** Liste des projets */
+			$projets = $this->Projets_model->getAllProjet();
+			$data['projets'] = $projets;
+
+			$this->load->view('admin/templates/header_view', $data);
+			$this->load->view('admin/pages/listeProjets_view', $data);
+			$this->load->view('admin/templates/footer_view');
+		}
+		else {
+			$full_path = $this->upload->data('file_name');
+
+			$data = array(
+				'image_pro' => strtolower($full_path)
+			);
+
+			$updateProjet = $this->Projets_model->updateProjet($data, $token);
+			if ($updateProjet = true) {
+				$this->session->set_flashdata('success', 'Modification de l\'image d\'un projet réussi');
+				redirect('Admin/Projets');
+			} else {
+				$this->session->set_flashdata('error', 'Veuillez réessayer.');
+				redirect('Admin/Projets/ModifierImage/'.$token);
+			}
+		}
+	}
 }
 
 
