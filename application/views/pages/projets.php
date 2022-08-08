@@ -4,149 +4,44 @@
 			<div class="col-md-7 heading-section text-center ftco-animate">
 				<h1 class="big big-2">Projets</h1>
 				<h2 class="mb-4">Mes projets</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+				<p>La liste des projets que j'ai réalisé ou qui sont en cours de réalisation.</p>
 			</div>
 		</div>
-		<div class="row d-flex">
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/6.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">En cour</a>
-							</p>
+		<?php if($results != false):?>
+			<div class="row d-flex">
+				<?php foreach ($results as $pro):?>
+					<div class="col-md-4 d-flex ftco-animate">
+						<div class="blog-entry justify-content-end">
+							<a href="<?php echo base_url();?>Projets/detailProjet/<?php echo $pro->token;?>" class="block-20" style="background-image: url('<?php echo base_url();?>uploads/projets/<?php echo $pro->image_pro;?>');">
+							</a>
+							<div class="text mt-3 float-right d-block">
+								<div class="d-flex align-items-center mb-3 meta">
+									<p class="mb-0">
+										<span class="mr-2">
+											<?php echo  date("d-m-Y", strtotime($pro->date_pro)) ;?>
+										</span>
+										<a href="<?php echo base_url();?>Projets/detailProjet/<?php echo $pro->token;?>" class="mr-2"><?php echo $pro->type;?></a>
+									</p>
+								</div>
+								<a href="<?php echo base_url();?>Projets/detailProjet/<?php echo $pro->token;?>">
+									<h3 class="heading"><?php echo $pro->titre_pro;?></h3>
+								</a>
+								<p>
+									<?php echo $pro->slide_descrip;?>
+								</p>
+							</div>
 						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
 					</div>
+				<?php endforeach;?>
+				<div id="pagination" class="col-md-12">
+					<ul class="tsc_pagination">
+						<!-- Show pagination links -->
+						<?php foreach ($links as $link) {
+							echo "<li style='margin:10px; display:block;'>". $link."</li>";
+						} ?>
+					</ul>
 				</div>
 			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/15.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">Terminer</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/12.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">En cour</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row d-flex">
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="<?php echo base_url();?>Projets/detailProjet" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/6.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">En cour</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="<?php echo base_url();?>Projets/detailProjet">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/15.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">Terminer</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/12.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">En cour</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row d-flex">
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/6.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">En cour</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/15.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">Terminer</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-					<a href="single.html" class="block-20" style="background-image: url('<?php echo base_url();?>assets/images/projets/12.png');">
-					</a>
-					<div class="text mt-3 float-right d-block">
-						<div class="d-flex align-items-center mb-3 meta">
-							<p class="mb-0">
-								<span class="mr-2">June 21, 2019</span>
-								<a href="#" class="mr-2">En cour</a>
-							</p>
-						</div>
-						<h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-					</div>
-				</div>
-			</div>
-		</div>
+		<?php endif;?>
 	</div>
 </section>

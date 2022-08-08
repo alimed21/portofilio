@@ -1,6 +1,6 @@
 <?php if($projets != false):?>
 	<?php foreach ($projets as $pro):?>
-		<section class="hero-wrap js-fullheight" style="background-image: url('<?php echo base_url();?>uploads/projets/<?php echo $pro->image_pro;?>');" data-stellar-background-ratio="0.5">
+		<section class="hero-wrap js-fullheight" style="background-image: url('<?php echo base_url();?>uploads/projets/<?php echo $pro->image_pro;?>');margin-top: 90px;" data-stellar-background-ratio="0.5">
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">

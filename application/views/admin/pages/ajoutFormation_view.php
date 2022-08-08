@@ -27,7 +27,7 @@
 							</div>
 						<?php endif;?>
 						<div class="card-body">
-							<form class="form" action="<?php echo base_url();?>Admin/Articles/verificationAjout" method="post">
+							<form class="form" action="<?php echo base_url();?>Admin/Formations/verificationAjout" method="post">
 								<div class="row">
 
 									<div class="col-md-6 col-12">

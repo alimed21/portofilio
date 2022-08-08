@@ -30,7 +30,7 @@ class Formations extends CI_Controller
 		$data['formations'] = $formations;
 
 		$this->load->view('admin/templates/header_view', $data);
-		$this->load->view('admin/pages/listeProjets_view', $data);
+		$this->load->view('admin/pages/listeFormations_view', $data);
 		$this->load->view('admin/templates/footer_view');
 	}
 
@@ -40,6 +40,46 @@ class Formations extends CI_Controller
 		$this->load->view('admin/templates/header_view', $data);
 		$this->load->view('admin/pages/ajoutFormation_view');
 		$this->load->view('admin/templates/footer_view');
+	}
+
+	public function verificationAjout()
+	{
+		$this->form_validation->set_rules('titre', "titre", 'trim|required');
+        $this->form_validation->set_rules('annee', 'année', 'trim|required');
+        $this->form_validation->set_rules('description', 'introduction', 'trim|required');
+
+		if ($this->form_validation->run() == true) {
+            //True
+			$titre = $this->input->post('titre');
+			$annee = $this->input->post('annee');
+			$description = $this->input->post('description');
+			$id_admin = $this->session->userdata('id_admin');
+			$date_add = $this->getDatetimeNow();
+
+			
+			$data = array(
+				'titre' => $titre,
+				'intro' => $description,
+				'annee' => $annee,
+				'admin_add' => $id_admin,
+				'date_add' => $date_add
+			);
+
+			$ajoutFormations = $this->Formations_model->addFormation($data);
+
+			if ($ajoutFormations = true) {
+				$this->session->set_flashdata('success', 'Votre formation a été ajouté');
+				redirect('Admin/Formations/', 'refresh');
+			}
+			else{
+				$this->session->set_flashdata('error', "Votre formation n'a pas été ajouté");
+				redirect('Admin/Projets/ajoutFormation', 'refresh');
+			}
+		}
+		else{
+			//false
+			$this->ajoutFormation();
+		}
 	}
 
 }

@@ -12,11 +12,11 @@ class Projets extends CI_Controller
 
 	public function index(){
 		/** Configuration tous les articles */
-		$row =  $this->Articles_model->record_count();
+		$row =  $this->Projets_model->record_count();
 
 		$config = array();
 
-		$config["base_url"] = base_url() . "Articles/index";
+		$config["base_url"] = base_url() . "Projets/index";
 
 		$config["total_rows"] = $row;
 
@@ -36,14 +36,14 @@ class Projets extends CI_Controller
 		$str_links = $this->pagination->create_links();
 		$data["links"] = explode('&nbsp;',$str_links );
 
-		$results = $this->Articles_model->fetch_article($config["per_page"], $page);
+		$results = $this->Projets_model->fetch_article($config["per_page"], $page);
 		$data['results'] = $results;
 
 		$links = explode('&nbsp;',$str_links );
 		$data['links'] = $links;
 
 		$this->load->view('templates/header');
-		$this->load->view('pages/projets');
+		$this->load->view('pages/projets', $data);
 		$this->load->view('templates/footer');
 	}
 

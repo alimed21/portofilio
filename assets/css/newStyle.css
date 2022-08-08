@@ -26,11 +26,17 @@ ul.tsc_pagination li a:hover,
 ul.tsc_pagination li a.current
 {
 	background: #ffbd39 ;
-	border-color: #fffff;
+	border-color: #ffff;
 	color: #fff;
 	width: 36px;
 	height: 36px;
 }
 #pagination a:visited{
 	color:white;
+}
+
+/** Image icon style **/
+.imgClass{
+	width: 100px;
+	height: auto;
 }

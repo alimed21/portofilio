@@ -100,6 +100,20 @@
                                 <span>Menus</span>
                             </a>
                         </li>
+
+                        <li class="sidebar-item">
+                            <a href="<?php echo base_url();?>Admin/Formations" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Formations</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="<?php echo base_url();?>Admin/Competences" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Compétences</span>
+                            </a>
+                        </li>
                         <li class="sidebar-title">Paramétres</li>
 
                         <li class="sidebar-item">

@@ -84,36 +84,21 @@
 			<div class="col-md-10 heading-section text-center ftco-animate">
 				<h1 class="big big-2">Formations</h1>
 				<h2 class="mb-4">Formations</h2>
-				<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+				<!--<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>-->
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6">
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2019-2020</span>
-					<h2>Master Professionnel en Génie Logiciel (M1-MPGL)</h2>
-					<span class="position">Ecole d’ingénerie PolyTech Intl de Tunis</span>
-				</div>
-
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2014-2016</span>
-					<h2>Diplôme Universitaire de Technologie Informatique, Analyse et Programmation</h2>
-					<span class="position">Université de Djibouti</span>
-				</div>
-			</div>
-
-			<div class="col-md-6">
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2016-2017</span>
-					<h2>Licence Appliquer en Base des Données et Logiciels (LABDL)</h2>
-					<span class="position">Université de Djibouti</span>
-				</div>
-				<div class="resume-wrap ftco-animate">
-					<span class="date">2010-2014</span>
-					<h2>Diplôme Baccalauréat, Série Scientifique</h2>
-					<span class="position">Lycéee de Gabode</span>
-				</div>
-			</div>
+			<?php if($formations != false):?>
+				<?php foreach ($formations as $for):?>
+					<div class="col-md-6">
+						<div class="resume-wrap ftco-animate">
+							<span class="date"><?php echo $for->annee;?></span>
+							<h2><?php echo $for->titre;?></h2>
+							<span class="position"><?php echo $for->intro;?></span>
+						</div>
+					</div>
+				<?php endforeach;?>
+			<?php endif;?>
 		</div>
 		<div class="row justify-content-center mt-5">
 			<div class="col-md-6 text-center ftco-animate">
@@ -129,43 +114,30 @@
 			<div class="col-md-12 heading-section text-center ftco-animate">
 				<h1 class="big big-2">Services</h1>
 				<h2 class="mb-4">Services</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+				<!--<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>-->
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 text-center d-flex ftco-animate">
-				<a href="#" class="services-1">
+			<?php if($services != false):?>
+				<?php foreach ($services as $ser):?>
+					<div class="col-md-4 text-center d-flex ftco-animate">
+						<a href="#" class="services-1">
 							<span class="icon">
-								<i class="flaticon-analysis"></i>
+								<!--<i class="flaticon-analysis"></i>-->
+								<img src="<?php echo base_url();?>uploads/service/<?php echo $ser->image_ser;?>" alt="Image" class="imgClass">
 							</span>
-					<div class="desc">
-						<h3 class="mb-5">Déveleoppement des applications</h3>
+							<div class="desc">
+								<h3 class="mb-5"><?php echo $ser->titre_ser;?></h3>
+							</div>
+						</a>
 					</div>
-				</a>
+				<?php endforeach;?>
+			<?php endif;?>
+		</div>
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-6 text-center ftco-animate">
+				<p><a href="<?php echo base_url();?>Services/allServices" class="btn btn-primary py-4 px-5">Voir plus</a></p>
 			</div>
-
-			<div class="col-md-4 text-center d-flex ftco-animate">
-				<a href="#" class="services-1">
-							<span class="icon">
-								<i class="flaticon-ideas"></i>
-							</span>
-					<div class="desc">
-						<h3 class="mb-5">Déveleoppement des sites web</h3>
-					</div>
-				</a>
-			</div>
-
-			<div class="col-md-4 text-center d-flex ftco-animate">
-				<a href="#" class="services-1">
-							<span class="icon">
-								<i class="flaticon-analysis"></i>
-							</span>
-					<div class="desc">
-						<h3 class="mb-5">Déveleoppement des services web</h3>
-					</div>
-				</a>
-			</div>
-
 		</div>
 	</div>
 </section>
@@ -176,76 +148,24 @@
 			<div class="col-md-12 heading-section text-center ftco-animate">
 				<h1 class="big big-2">Compétences</h1>
 				<h2 class="mb-4">Mes compétences</h2>
-				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-6 animate-box">
-				<div class="progress-wrap ftco-animate">
-					<h3>Codeigniter (PHP)</h3>
-					<div class="progress">
-						<div class="progress-bar color-1" role="progressbar" aria-valuenow="90"
-							 aria-valuemin="0" aria-valuemax="100" style="width:90%">
-							<span>90%</span>
+			<?php if($competences != false):?>
+				<?php foreach ($competences as $cmp):?>
+					<div class="col-md-6 animate-box">
+						<div class="progress-wrap ftco-animate">
+							<h3><?php echo $cmp->titre_cmp;?></h3>
+							<div class="progress">
+								<div class="progress-bar color-1" role="progressbar" aria-valuenow="90"
+									aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $cmp->taille_cmp;?>%">
+									<span><?php echo $cmp->taille_cmp;?>%</span>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-6 animate-box">
-				<div class="progress-wrap ftco-animate">
-					<h3>jQuery</h3>
-					<div class="progress">
-						<div class="progress-bar color-2" role="progressbar" aria-valuenow="85"
-							 aria-valuemin="0" aria-valuemax="100" style="width:85%">
-							<span>85%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 animate-box">
-				<div class="progress-wrap ftco-animate">
-					<h3>Flask (Python)</h3>
-					<div class="progress">
-						<div class="progress-bar color-3" role="progressbar" aria-valuenow="95"
-							 aria-valuemin="0" aria-valuemax="100" style="width:95%">
-							<span>95%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 animate-box">
-				<div class="progress-wrap ftco-animate">
-					<h3>SQL</h3>
-					<div class="progress">
-						<div class="progress-bar color-4" role="progressbar" aria-valuenow="90"
-							 aria-valuemin="0" aria-valuemax="100" style="width:90%">
-							<span>90%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 animate-box">
-				<div class="progress-wrap ftco-animate">
-					<h3>WordPress</h3>
-					<div class="progress">
-						<div class="progress-bar color-5" role="progressbar" aria-valuenow="70"
-							 aria-valuemin="0" aria-valuemax="100" style="width:90%">
-							<span>90%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 animate-box">
-				<div class="progress-wrap ftco-animate">
-					<h3>Docker</h3>
-					<div class="progress">
-						<div class="progress-bar color-6" role="progressbar" aria-valuenow="80"
-							 aria-valuemin="0" aria-valuemax="100" style="width:80%">
-							<span>80%</span>
-						</div>
-					</div>
-				</div>
-			</div>
+				<?php endforeach;?>
+			<?php endif;?>
 		</div>
 	</div>
 </section>
@@ -263,7 +183,7 @@
 				<?php foreach ($projets as $pro):?>
 					<div class="col-md-4 d-flex ftco-animate">
 						<div class="blog-entry justify-content-end">
-							<a href="<?php echo base_url();?>Projetsa/detailProjet/<?php echo $pro->token;?>" class="block-20" style="background-image: url('<?php echo base_url();?>uploads/projets/<?php echo $pro->image_pro;?>');">
+							<a href="<?php echo base_url();?>Projets/detailProjet/<?php echo $pro->token;?>" class="block-20" style="background-image: url('<?php echo base_url();?>uploads/projets/<?php echo $pro->image_pro;?>');">
 							</a>
 							<div class="text mt-3 float-right d-block">
 								<div class="d-flex align-items-center mb-3 meta">
@@ -271,11 +191,13 @@
 										<span class="mr-2">
 											<?php echo  date("d-m-Y", strtotime($pro->date_pro)) ;?>
 										</span>
-										<!--<a href="#" class="mr-2">Admin</a>
-										<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>-->
 									</p>
 								</div>
-								<h3 class="heading"><a href="<?php echo base_url();?>Projets/detailProjet/<?php echo $pro->token;?>"><?php echo $pro->titre_pro;?></a></h3>
+								<a href="<?php echo base_url();?>Projets/detailProjet/<?php echo $pro->token;?>">
+									<h3 class="heading">
+										<?php echo $pro->titre_pro;?>
+									</h3>
+								</a>
 								<p>
 									<?php echo $pro->slide_descrip;?>
 								</p>
@@ -441,7 +363,7 @@
 
 		<div class="row no-gutters block-9">
 			<div class="col-md-6 order-md-last d-flex">
-				<form action="#" class="bg-light p-4 p-md-5 contact-form">
+				<form action="<?php echo base_url();?>Contact" method="post" class="bg-light p-4 p-md-5 contact-form">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Votre nom...">
 					</div>

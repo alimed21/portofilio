@@ -52,7 +52,7 @@ class Projets_model extends CI_Model
 		$this->db->limit($limit, $start);
 		$this->db->where('user_delete is null');
 		$this->db->where('date_delete is null');
-		$this->db->order_by('article_date', 'desc');
+		$this->db->order_by('date_pro', 'desc');
 		$query = $this->db->get("projet");
 
 

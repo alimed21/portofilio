@@ -11,7 +11,7 @@ class Projets_model extends CI_Model
         $this->db->select("id_pro, titre_pro, substr(contenu_pro, 1, 150) as slide_descrip, lien, type, image_pro, p.date_add, token");
         $this->db->from("projet as p");
         $this->db->join("administrateur as ad", "ad.id_admin  = p.user_add");
-        $this->db->where("p.date_delete is null");
+        $this->db->where("p.user_delete is null");
         $this->db->where("p.date_delete is null");
         $this->db->order_by('id_pro',"DESC");
         $query = $this->db->get();
